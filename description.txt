@@ -1,0 +1,9 @@
+STM32 microcontroller in LQFP64 package. 
+Three LEDs: USB communication (LD1), user LED (LD2), power LED (LD3). 
+Two push-buttons: USER and RESET. 
+Two types of extension resources: Arduino™ Uno V3 connectivity and ST morpho extension pin headers for full access to all STM32 I/Os. 
+Flexible board power supply: USB VBUS or external source (3.3 V, 5 V, 7 - 12 V) and Power management access point. 
+On-board ST-LINK/V2-1 debugger and programmer with SWD connector - Selection-mode switch to use the kit as a standalone ST-LINK/V2-1.
+USB re-enumeration capability. Three different interfaces supported on USB: Virtual COM port, Mass storage, Debug port. 
+Comprehensive free software HAL library including a variety of software examples. 
+Arm® Mbed™ (see http://mbed.org). 
