@@ -1,3 +1,6 @@
 [submodule "lib/CmdArduino"]
 	path = lib/CmdArduino
 	url = https://github.com/kamenov69/CmdArduino.git
+[submodule "lib/Ticker"]
+	path = lib/Ticker
+	url = https://github.com/kamenov69/Ticker.git
