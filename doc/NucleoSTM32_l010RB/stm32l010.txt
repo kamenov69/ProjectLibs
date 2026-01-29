@@ -1,0 +1,10 @@
+Key Pinout Features (Nucleo-64 Layout): 
+Arduino Connectors (CN6, CN7, CN8, CN9): 
+Pinout mapping conforms to Arduino Uno V3 (e.g., D0-D15, A0-A5, power pins).ST 
+Morpho Headers (CN7/CN10): Direct access to all LQFP64 pins, including GPIOs (PORTA, PORTB, PORTC,PORTD).
+User LED (LD2): Connected to PA5.
+User Button (B1): Connected to PC13.
+Debugger/Virtual COM Port: ST-LINK/V2-1 connects to USART2 (PA2/PA3). 
+Common Pin Functions: Power: \(3.3V\), \(5V\), GND, \(VIN\), \(E5V\).ADC: 
+Up to 16 channels, 12-bit.I2C: 1x I2C (SMBus/PMBus).
+USART/LPUART: 1x USART, 1x LPUART.SPI: 1x SPI (16 Mbit/s). 
