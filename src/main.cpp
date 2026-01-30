@@ -2,12 +2,12 @@
 #include "board.h"
 
 #include "clocksynt.h"
-
+#include "globals.h"
 
 void setup() {
     setup_board();
-    setup_clocksynt();
-
+    setup_SI5351_clck_synt();
+    setup_globals();
 }
 
 void loop() {
