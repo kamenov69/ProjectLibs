@@ -2,6 +2,9 @@
 #include "board.h"
 #include "Ticker.h"
 #include "Cmd.h"
+#include "globalVars.h"
+
+
 
 uint8_t _blinks = 1;
 
@@ -27,7 +30,9 @@ void setup_board(){
 
     cmdInit(&Serial);
     cmdAdd("hello", [](int argn, char** args){cmdGetStream()->println("STM32LibTest");});
-    cmdAdd("mode", _set_mode);
+    globals.add("mode", 0,0,2);
+
+    //cmdAdd("mode", _set_mode);
 
     ledTicker.start();
 }
@@ -35,10 +40,15 @@ void setup_board(){
 void loop_board(){
     cmdPoll();
     ledTicker.update();
-
-    if(mode != _blinks-1){
-      _blinks = mode+1;
-    }  
+    if(globals.isUpdated("mode")){
+       globals.clearUpdated("mode");
+       VARS_TYPE_ tmp;
+       globals.get("mode", tmp);
+       _blinks = (int8_t)tmp + 1;
+    }
+    //if(mode != _blinks-1){
+    //  _blinks = mode+1;
+    //}  
 }
 
 

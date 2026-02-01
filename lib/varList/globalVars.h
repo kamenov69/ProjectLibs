@@ -5,5 +5,5 @@
 #define VARS_TYPE_  int32_t
 
 using Vars = VarList<VARS_TYPE_>;   // 
-extern Vars vars;
+extern Vars globals;
 void add_vars_commands();
