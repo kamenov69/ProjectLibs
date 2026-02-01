@@ -3,8 +3,6 @@
 #include "board.h"
 #include "Ticker.h"
 #include "Cmd.h"
-
-#include "globals.h"
 #include <Wire.h>
 
 
@@ -178,11 +176,11 @@ void setup_SI5351_clck_synt()
 }
  
 void loop_clocksynt(){
-  int i =index("khz");
-  if(globals[i].updated){
-      globals[i].updated = false;
-      set_frqu((uint32_t) globals[i].value*1000);
-  }
+ // int i =index("khz");
+ // if(globals[i].updated){
+ //     globals[i].updated = false;
+ //     set_frqu((uint32_t) globals[i].value*1000);
+ // }
 }
 
 
