@@ -4,7 +4,7 @@
 #include "Ticker.h"
 #include "Cmd.h"
 #include <Wire.h>
-
+#include "globalVars.h"  
 
 uint32_t fref = 25000000UL;                  // The reference frequency
 
@@ -171,16 +171,21 @@ void setup_SI5351_clck_synt()
     delayMicroseconds(500);            
  
     Initialize();
+
     set_frqu(freq);
+
+    add_new_global_var("ckhz",10, 0, 100000);
  
 }
  
 void loop_clocksynt(){
- // int i =index("khz");
- // if(globals[i].updated){
- //     globals[i].updated = false;
- //     set_frqu((uint32_t) globals[i].value*1000);
- // }
+
+    if(globals.isUpdated("ckhz")){
+        globals.clearUpdated("ckhz");
+        uint32_t f2 = ((uint32_t) globals.get("ckhz")) * 1000;
+        set_frqu(f2);
+    }
+    
 }
 
 

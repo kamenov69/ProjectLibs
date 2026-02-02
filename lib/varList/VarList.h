@@ -73,6 +73,7 @@ private:
   Node* head_;
 
   static T clamp(T v, T lo, T hi) {
+    if (lo == hi) return v;
     if (v < lo) return lo;
     if (v > hi) return hi;
     return v;
