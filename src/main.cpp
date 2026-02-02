@@ -8,9 +8,9 @@ void setup() {
     setup_board();
     setup_SI5351_clck_synt();
     
-    globals.add("glo",1,-10,10);
+    add_new_global_var("glo",1,-10,10);
     
-    add_vars_commands();  // globals -> Cmd
+    setup_var_list_cmd();
 }
 
 void loop() {

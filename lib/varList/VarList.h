@@ -1,9 +1,7 @@
 #pragma once
 #include <Arduino.h>
 #include <avr/pgmspace.h>
-#pragma once
-#include <Arduino.h>
-#include <avr/pgmspace.h>
+
 
 template <typename T>
 class VarList {
@@ -17,7 +15,7 @@ public:
     Node* next;
   };
 
-  VarList() : head_(nullptr) {}
+  VarList() : head_(nullptr) {};
 
   bool add(const char* name_P, T initial, T minVal, T maxVal) {
     if (!name_P) return false;
@@ -35,18 +33,22 @@ public:
     head_ = n;
     return true;
   }
-
-  bool get(const char* name_P, T& out) const {
-    Node* n = findNode(name_P);
-    if (!n) return false;
-    out = n->value;
-    return true;
+  
+  const char * get_name()const{
+    return this->name_P;
   }
+  
 
-  bool set(const char* name_P, T v) {
+  T get(const char* name_P)const{
+        Node* n = findNode(name_P);
+        if (!n) return false;
+        //out = n->value;
+        return n->value;
+    }
+
+  bool set(const char* name_P, T v){
     Node* n = findNode(name_P);
     if (!n) return false;
-
     T nv = clamp(v, n->minVal, n->maxVal);
     if (nv != n->value) {
       n->value = nv;
@@ -55,7 +57,7 @@ public:
     return true;
   }
 
-  bool isUpdated(const char* name_P) const {
+  bool isUpdated(const char* name_P)const{
     Node* n = findNode(name_P);
     return n ? n->updated : false;
   }
@@ -76,7 +78,7 @@ private:
     return v;
   }
 
-  Node* findNode(const char* name_P) const {
+  Node* findNode(const char* name_P)const{
     Node* cur = head_;
     while (cur) {
       if (strcmp_P(name_P, cur->name_P) == 0)

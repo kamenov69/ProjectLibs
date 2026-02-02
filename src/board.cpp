@@ -4,22 +4,12 @@
 #include "Cmd.h"
 #include "globalVars.h"
 
-
-
+//void _set_mode(int argn, char** args);
+//void set_blinks(uint8_t i){_blinks = i;}
+//uint8_t mode = 0;
 uint8_t _blinks = 1;
-
-
-void _set_mode(int argn, char** args);
 void _led_task(void);
-void set_blinks(uint8_t i){_blinks = i;}
-
-uint8_t mode = 0;
 Ticker ledTicker(_led_task, LED_PERIOD, 0, MILLIS);
-
-
-
-
-
 
 void setup_board(){   
     //Serial.begin(9600);
@@ -30,8 +20,7 @@ void setup_board(){
 
     cmdInit(&Serial);
     cmdAdd("hello", [](int argn, char** args){cmdGetStream()->println("STM32LibTest");});
-    globals.add("mode", 0,0,2);
-
+    add_new_global_var("mode", 0,0,2);
     //cmdAdd("mode", _set_mode);
 
     ledTicker.start();
@@ -42,9 +31,7 @@ void loop_board(){
     ledTicker.update();
     if(globals.isUpdated("mode")){
        globals.clearUpdated("mode");
-       VARS_TYPE_ tmp;
-       globals.get("mode", tmp);
-       _blinks = (int8_t)tmp + 1;
+       _blinks = (int8_t)globals.get("mode") + 1;
     }
     //if(mode != _blinks-1){
     //  _blinks = mode+1;

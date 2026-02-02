@@ -14,8 +14,6 @@ float parse_float(int nargs, char **args){
   
     if((nargs > 0)){
       float  tmparg1 = (float)cmdStr2Num(args[0], 10);
-      //Serial.print("debug parse   ");
-      //Serial.println(tmparg1);
       int  tmparg2 = 0;
       if (nargs > 1){ 
         tmparg2 =  cmdStr2Num(args[1], 10);
@@ -31,13 +29,8 @@ void _vars_update(int argc, char **args){
     if(argc > 1){
        VARS_TYPE_ tmp = (VARS_TYPE_)(parse_float(--argc, ++args));
        globals.set(n, tmp);
-       globals.isUpdated(n);
     }
-    VARS_TYPE_ val;
-    if(globals.get(n, val)){
-        cmdGetStream()->println(val);
-    }
-    else cmdGetStream()->println("None");
+    cmdGetStream()->println(globals.get(n));
     
 }
 
@@ -62,12 +55,13 @@ void _vars_list(int argc, char **args){
 
 }
 
-void add_vars_commands(){
-    cmdAdd("varlst", _vars_list);
-    for (auto* n = globals.head(); n != nullptr; n = n->next) {
-       char buf[16];
-       strcpy_P(buf, n->name_P);
-       cmdAdd(buf,_vars_update);
-       
-    }
+void add_new_global_var(const char * name, VARS_TYPE_ value, VARS_TYPE_ min, VARS_TYPE_ max){
+    globals.add(name, value, min, max);
+    cmdAdd(name, _vars_update);
+
 }
+
+
+void setup_var_list_cmd(){cmdAdd("varlst", _vars_list);}
+
+
